@@ -67,6 +67,8 @@ public class XWalkCordovaResourceClient extends XWalkResourceClient {
     @Override
     public WebResourceResponse shouldInterceptLoadRequest(XWalkView view, String url) {
         try {
+        	
+            LOG.v("Manifest", url.toString());	
             // Check the against the white-list.
             if (!parentEngine.pluginManager.shouldAllowRequest(url)) {
                 LOG.w(TAG, "URL blocked by whitelist: " + url);
