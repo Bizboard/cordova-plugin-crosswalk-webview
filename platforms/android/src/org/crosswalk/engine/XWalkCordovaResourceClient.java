@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.net.http.SslError;
 import android.webkit.ValueCallback;
 import android.webkit.WebResourceResponse;
+import android.webkit.WebResourceRequest;
 
 import org.apache.cordova.CordovaResourceApi;
 import org.apache.cordova.CordovaResourceApi.OpenForReadResult;
@@ -33,6 +34,7 @@ import org.xwalk.core.ClientCertRequest;
 import org.xwalk.core.XWalkHttpAuthHandler;
 import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkView;
+import android.util.Log;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -68,7 +70,7 @@ public class XWalkCordovaResourceClient extends XWalkResourceClient {
     public WebResourceResponse shouldInterceptLoadRequest(XWalkView view, String url) {
         try {
         	
-            LOG.v("Manifest", url.toString());	
+            Log.v("Manifest", url.toString());	
             // Check the against the white-list.
             if (!parentEngine.pluginManager.shouldAllowRequest(url)) {
                 LOG.w(TAG, "URL blocked by whitelist: " + url);
@@ -94,6 +96,12 @@ public class XWalkCordovaResourceClient extends XWalkResourceClient {
             // Results in a 404.
             return new WebResourceResponse("text/plain", "UTF-8", null);
         }
+    }
+    
+    @Override
+    public WebResourceResponse shouldInterceptRequest(XWalkView view, WebResourceRequest request) {
+        Log.v("Manifest", request.toString());	
+       return null;
     }
 
     @Override
