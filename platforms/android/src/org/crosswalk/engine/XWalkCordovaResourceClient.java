@@ -98,7 +98,6 @@ public class XWalkCordovaResourceClient extends XWalkResourceClient {
         }
     }
     
-    @Override
     public WebResourceResponse shouldInterceptRequest(XWalkView view, WebResourceRequest request) {
         Log.v("Manifest", request.toString());	
        return null;
